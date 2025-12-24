@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Love</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffd6e8, #ffb6d5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Envelope & Letter */
+  .envelope { width: 340px; height: 220px; perspective: 1000px; cursor: pointer; position: relative; z-index:2;}
+  .back { width:100%; height:100%; background:#fff; border-radius:10px; position:absolute; }
+  .flap { position:absolute; width:100%; height:100%; background:#ffe3f1; clip-path: polygon(0 0,50% 60%,100% 0,100% 0,0 0); transform-origin: top; transition: transform 1s ease; border-radius:10px; }
+  .envelope.open .flap { transform: rotateX(180deg); }
+  .letter { position:absolute; width:92%; height:190%; top:20px; left:4%; padding:22px; box-sizing:border-box; text-align:center; opacity:0; transform:translateY(40px); transition: all 1.5s ease; border-radius:8px; overflow-y:auto; z-index:3; }
+  .envelope.open .letter { opacity:1; transform:translateY(-55px); }
+
+  .line { opacity:0; animation: fadeIn 1s forwards; font-size:1.05rem; color:#333; margin-bottom:6px; }
+  @keyframes fadeIn { to{opacity:1;} }
+
+  .hint { position:absolute; bottom:-45px; width:100%; text-align:center; font-size:0.9rem; color:#7a0046; opacity:0.7; z-index:3;}
+
+  /* Next button */
+  #nextBtn { display:none; margin-top:20px; padding:10px 20px; font-size:1rem; background:#ff1493; color:white; border:none; border-radius:6px; cursor:pointer; }
+
+  /* Floating hearts/kisses */
+  .symbol { position:absolute; font-size:1.5rem; animation: float 6s linear infinite; opacity:0.7; }
+  @keyframes float { 0%{transform:translateY(100vh) rotate(0deg); opacity:0;} 50%{opacity:1;} 100%{transform:translateY(-20vh) rotate(360deg); opacity:0;} }
+</style>
+</head>
+<body>
+
+<!-- Hearts/Kisses -->
+<script>
+const symbols=['❤️','💋','💖','💕'];
+for(let i=0;i<30;i++){
+  const s=document.createElement('div');
+  s.className='symbol';
+  s.innerHTML=symbols[Math.floor(Math.random()*symbols.length)];
+  s.style.left=Math.random()*100+'vw';
+  s.style.fontSize=(12+Math.random()*24)+'px';
+  s.style.animationDuration=(4+Math.random()*5)+'s';
+  document.body.appendChild(s);
+}
+</script>
+
+<div class="envelope" onclick="openEnvelope()">
+  <div class="back"></div>
+  <div class="flap"></div>
+
+  <div class="letter" id="letter">
+    <div class="line">Heyy love,</div>
+    <div class="line">I wanted to say…</div>
+    <div class="line">I know words are not enough to describe you.</div>
+    <div class="line">But to this most handsome man, I still want to try.</div>
+
+    <div class="line">I may not always make you feel good.</div>
+    <div class="line">I mess up, overthink, and say things the wrong way.</div>
+
+    <div class="line">But thank you.</div>
+    <div class="line">Thank you for being my therapist,</div>
+    <div class="line">my safe place,</div>
+    <div class="line">my everything.</div>
+
+    <div class="line">How was I this lucky to have you, baby?</div>
+    <div class="line">This year wasn’t really good…</div>
+    <div class="line">but with you, it felt alive.</div>
+
+    <div class="line">I felt like I was actually living.</div>
+    <div class="line">Nahi toh pata nahi kya hota.</div>
+
+    <div class="line">This whole year felt like a dream,</div>
+    <div class="line">and I never want to wake up from it.</div>
+
+    <div class="line">Thank you for listening to my bakwas,</div>
+    <div class="line">alwaysssss.</div>
+
+    <div class="line">Thank you for staying when things were heavy.</div>
+    <div class="line">Thank you for choosing me when I couldn’t choose myself.</div>
+
+    <div class="line">New year.</div>
+    <div class="line">Same us.</div>
+
+    <div class="line">I’m not letting you go.</div>
+    <div class="line">Not in 2025.</div>
+    <div class="line">Not in 2026.</div>
+    <div class="line">Not even when we’re arguing on hospital beds someday.</div>
+
+    <div id="nextBtnContainer"><button id="nextBtn" onclick="goLast()">Click for Last</button></div>
+  </div>
+
+  <div class="hint">Click to open</div>
+</div>
+
+<script>
+const lines=document.querySelectorAll('.line');
+lines.forEach((line,index)=>{
+  line.style.animationDelay=(index*1.2+1)+'s';
+});
+
+function openEnvelope(){
+  document.querySelector('.envelope').classList.add('open');
+
+  // Confetti
+  for(let i=0;i<60;i++){
+    const conf=document.createElement('div');
+    conf.className='symbol';
+    conf.innerHTML=['💖','💋','❤️'][Math.floor(Math.random()*3)];
+    conf.style.left=Math.random()*100+'vw';
+    conf.style.fontSize=(14+Math.random()*20)+'px';
+    conf.style.animationDuration=(4+Math.random()*5)+'s';
+    document.body.appendChild(conf);
+    setTimeout(()=>conf.remove(),3000);
+  }
+
+  // Show "Click for Last" button after letter is done
+  setTimeout(()=>document.getElementById('nextBtn').style.display='inline-block',lines.length*1200+1000);
+}
+
+// Go to final page
+function goLast(){
+  window.location.href='final.html';
+}
+</script>
+
+</body>
+</html>
