@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Last Promise</title>
+<style>
+  body {
+    margin:0;
+    height:100vh;
+    font-family:'Segoe UI',sans-serif;
+    background: linear-gradient(135deg,#ffd6e8,#ffb6d5);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    overflow:hidden;
+  }
+  .message{
+    color:#7a0046;
+    font-size:1.4rem;
+    max-width:80%;
+    line-height:1.5;
+  }
+  .symbol { position:absolute; font-size:2rem; animation: float 6s linear infinite; opacity:0.7; }
+  @keyframes float { 0%{transform:translateY(100vh) rotate(0deg); opacity:0;} 50%{opacity:1;} 100%{transform:translateY(-20vh) rotate(360deg); opacity:0;} }
+</style>
+</head>
+<body>
+
+<div class="message">
+  At last… thank you for everything, and <strong>jaane toh nahi dungi kabhi.</strong><br>
+  2026 bhi nahi, jab tak hospital ke bed par nahi aajaenge, tab tak saath rehna hai. 💖
+</div>
+
+<script>
+const symbols=['❤️','💋','💖','💕'];
+for(let i=0;i<40;i++){
+  const s=document.createElement('div');
+  s.className='symbol';
+  s.innerHTML=symbols[Math.floor(Math.random()*symbols.length)];
+  s.style.left=Math.random()*100+'vw';
+  s.style.fontSize=(20+Math.random()*20)+'px';
+  s.style.animationDuration=(4+Math.random()*5)+'s';
+  document.body.appendChild(s);
+}
+</script>
+
+</body>
+</html>
